@@ -33,11 +33,13 @@ Vagrant.configure("2") do |config|
 
     # Install and configure python virtualenvwrapper.
     sudo pip install virtualenvwrapper
-    if ! grep -q VIRTUALENV_ALREADY_ADDED /home/ubuntu/.bashrc; then
-        echo "# VIRTUALENV_ALREADY_ADDED" >> /home/ubuntu/.bashrc
-        echo "WORKON_HOME=~/.virtualenvs" >> /home/ubuntu/.bashrc
-        echo "PROJECT_HOME=/vagrant" >> /home/ubuntu/.bashrc
-        echo "source /usr/local/bin/virtualenvwrapper.sh" >> /home/ubuntu/.bashrc
+    # here `vagrant` is the current user name, so that path should be set for the current user.
+    # otherwise  virtualenv commands return error
+    if ! grep -q VIRTUALENV_ALREADY_ADDED /home/vagrant/.bashrc; then
+        echo "# VIRTUALENV_ALREADY_ADDED" >> /home/vagrant/.bashrc
+        echo "WORKON_HOME=~/.virtualenvs" >> /home/vagrant/.bashrc
+        echo "PROJECT_HOME=/vagrant" >> /home/vagrant/.bashrc
+        echo "source `which virtualenvwrapper.sh`" >> /home/vagrant/.bashrc
     fi
 
   SHELL

@@ -24,11 +24,15 @@ vagrant up
 vagrant ssh
 
 cd /vagrant
-mkvirtualenv recipe_management
-workon recipe_management
+mkvirtualenv recipe_management_api --python=python3
+workon recipe_management_api
 
-pip install django==1.11
-pip install djangorestframework==3.6.2
+pip install django==2.1.7
+pip install djangorestframework==3.9.2
+
+or 
+
+pip install -r requirements.txt
 
 mkdir src
 cd src
@@ -36,11 +40,14 @@ cd src
 django-admin.py startproject recipe_management_project
 
 cd recipe_management_project/
-python manage.py startapp recipe_management_api
+
+# Create app to manage user Profiles
+python manage.py startapp profiles_app
 
 python manage.py migrate
 python manage.py makemigrations
 
 python manage.py runserver 0.0.0.0:8080
+
 http://127.0.0.1:8080/  (Hit this url in browser)
 ```
