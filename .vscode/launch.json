@@ -35,7 +35,9 @@
             "name": "Python: Django",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/manage.py",
+            // set path of the virtualenvs according to your system
+            "pythonPath": "/home/farhan/.virtualenvs/recipe_management_api/bin/python",
+            "program": "${workspaceFolder}/src/recipe_management_project/manage.py",
             "console": "integratedTerminal",
             "args": [
                 "runserver",
