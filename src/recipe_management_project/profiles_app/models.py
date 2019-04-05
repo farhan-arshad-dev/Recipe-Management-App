@@ -68,3 +68,20 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
         """Djang uses this when its need to convert the object to a string."""
 
         return self.email
+
+
+class RecipeModel(models.Model):
+    """ Represent a "Recipe" inside our system"""
+
+    user_profile = models.ForeignKey('UserProfile', on_delete=models.CASCADE)
+    title = models.CharField(max_length=255)
+    brief_description = models.TextField()
+    directions = models.TextField()
+    ingredients = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+
+
+    def __str__(self):
+        """Return the model as a string."""
+
+        return self.title

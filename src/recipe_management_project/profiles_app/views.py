@@ -3,6 +3,7 @@ from rest_framework import status, viewsets
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -56,3 +57,17 @@ class ChangePasswordView(APIView):
             return Response(status=status.HTTP_204_NO_CONTENT)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class RecipeViewSet(viewsets.ModelViewSet):
+    """Handles creating, reading and updating user's recipe items."""
+
+    authentication_classes = (TokenAuthentication,)
+    serializer_class = serializers.RecipeSerializer
+    queryset = models.RecipeModel.objects.all()
+    permission_classes = (permissions.UpdateOwnRecipes, IsAuthenticated)
+
+    def perform_create(self, serializer):
+        """Sets the user profile to the logged in user."""
+        
+        serializer.save(user_profile=self.request.user)

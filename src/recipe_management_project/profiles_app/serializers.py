@@ -24,4 +24,13 @@ class ChangePasswordSerializer(serializers.Serializer):
     """Serializer for password change endpoint."""
     old_password = serializers.CharField(required=True)
     new_password = serializers.CharField(required=True)
+
+
+class RecipeSerializer(serializers.ModelSerializer):
+    """Serializer for user'd Recipes object."""
+
+    class Meta:
+        model = models.RecipeModel
+        fields = ('id', 'user_profile', 'title', 'brief_description', 'directions', 'ingredients', 'created_on')
+        extra_kwargs = {'user_profile': {'read_only': True}}
     
