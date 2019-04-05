@@ -32,7 +32,7 @@ class LoginViewSet(viewsets.ViewSet):
         return ObtainAuthToken().post(request)
 
 
-class ChangePasswordView(viewsets.ViewSet):
+class ChangePasswordView(APIView):
     """An endpoint for changing password."""
     serializer_class = serializers.ChangePasswordSerializer
     model = models.UserProfile
@@ -40,7 +40,8 @@ class ChangePasswordView(viewsets.ViewSet):
     permission_classes = (permissions.UpdateOwnProfile,)
     authentication_classes = (TokenAuthentication,)
 
-    def create(self, request):
+    def patch(self, request, pk=None):
+        """Patch request, only updates fields provided in the request"""
 
         serializer = serializers.ChangePasswordSerializer(data=request.data)
         if serializer.is_valid():

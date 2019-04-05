@@ -10,9 +10,8 @@ router = DefaultRouter()
 
 router.register('profile', views.UserProfilesViewSet)
 router.register('login', views.LoginViewSet, base_name='login')
-router.register('change_password', views.ChangePasswordView, base_name='change_password')
-
 
 urlpatterns = [
+    url('change_password',views.ChangePasswordView.as_view()),
     url(r'', include(router.urls))
 ]
