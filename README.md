@@ -1,17 +1,20 @@
 # Recipe Management App
-This is an assignment based project whose details are given below. 
+This is an assignment based project whose details are given below.
 
 # Assignment Project
 Create a REST based backend for a recipe management app using Django 2 and Python 3. User stories for the app are as follows:
+### User APIs
 * New members should be able to register to the app.
 * Members should be able to login to the app.
 * Members should be able to change their passwords.
+* Members should be able to edit their profile.
+
+### Recipe APIs
 * Members should be able to add a new recipe. (Recipe should contain title, brief description, stepwise directions, and ingredients)
 * Members should be able to view all the recipes they have created.
+* Members should be able to update or remove their recipes.
 * Members should be able to follow other members.
 * Members should be able to view recipes of other members they are following.
-* Members should be able to edit their profile.
-* Members should be able to update or remove their recipes.
 
 ```
 # How to run the Project
