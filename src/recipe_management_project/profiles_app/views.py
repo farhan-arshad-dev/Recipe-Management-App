@@ -71,3 +71,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
         """Sets the user profile to the logged in user."""
         
         serializer.save(user_profile=self.request.user)
+
+    # override method to get user's own recipe data
+    def get_queryset(self):
+        return models.RecipeModel.objects.filter(user_profile=self.request.user.id)
