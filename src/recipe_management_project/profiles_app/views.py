@@ -19,8 +19,8 @@ class UserProfilesViewSet(viewsets.ModelViewSet):
     
     authentication_classes = (TokenAuthentication,)
     permission_classes = (permissions.UpdateOwnProfile,)
-    # filter_backends = (filters.SearchFilter,)
-    # search_fields = ('name', 'email',)
+    # Disable put method
+    http_method_names = ['get', 'post', 'head', 'patch']
 
 class LoginViewSet(viewsets.ViewSet):
     """Checks email and password and returns an auth token."""
