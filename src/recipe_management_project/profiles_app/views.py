@@ -1,11 +1,12 @@
-from django.shortcuts import render
 from rest_framework import status, viewsets
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.exceptions import NotAcceptable
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.viewsets import ModelViewSet
 
 from . import models, permissions, serializers
 
@@ -75,3 +76,24 @@ class RecipeViewSet(viewsets.ModelViewSet):
     # override method to get user's own recipe data
     def get_queryset(self):
         return models.RecipeModel.objects.filter(user_profile=self.request.user.id)
+
+
+
+class FollowingViewSet(viewsets.ModelViewSet):
+    """Handle user create, Retrive, delete the follow othre users"""
+
+    authentication_classes = (TokenAuthentication,)
+    serializer_class = serializers.UserFollowingSerializer
+    queryset = models.FollowingModel.objects.all()
+    permission_classes = (IsAuthenticated,)
+    http_method_names = ['get', 'post', 'head', 'delete']
+
+    def perform_create(self, serializer):
+        """Sets the user profile to the logged in user."""
+        if(serializer.validated_data['following_to'].id == self.request.user.id):
+            raise NotAcceptable("You can't follow your own profile")
+        
+        serializer.save(following_by=self.request.user)
+             
+    def get_queryset(self):
+        return models.FollowingModel.objects.filter(following_by=self.request.user.id)
