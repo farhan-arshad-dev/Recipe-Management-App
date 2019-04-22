@@ -90,8 +90,15 @@ class FollowingViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         """Sets the user profile to the logged in user."""
+
+        #  check user try to follow own profile
         if(serializer.validated_data['following_to'].id == self.request.user.id):
             raise NotAcceptable("You can't follow your own profile")
+
+        # check user is trying to follow already following user 
+        if(models.FollowingModel.objects.filter(following_to = serializer.validated_data['following_to'].id,\
+            following_by=self.request.user.id)):
+            raise NotAcceptable("You already following {} user".format(serializer.validated_data['following_to']))
         
         serializer.save(following_by=self.request.user)
              
