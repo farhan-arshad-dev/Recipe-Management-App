@@ -44,11 +44,22 @@ django-admin.py startproject recipe_management_project
 
 cd recipe_management_project/
 
+# Create app to manage all api end-points 
+python manage.py startapp api
+
+
 # Create app to manage user Profiles
 python manage.py startapp profiles_app
 
-python manage.py migrate
+
+# Create app to manage user recipes
+python manage.py startapp recipe_app
+
+# Create app to manage following other users profile(User profile following system)
+python manage.py startapp following_app
+
 python manage.py makemigrations
+python manage.py migrate
 
 python manage.py runserver 0.0.0.0:8080
 
