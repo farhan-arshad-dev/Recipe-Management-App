@@ -9,7 +9,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 
-from profiles_app import serializers as profiles_serializers
+from profiles_app import serializers as profile_serializers
 from profiles_app import models as profile_models
 from profiles_app import permissions
 
@@ -24,7 +24,7 @@ from following_app import models as following_models
 class UserProfilesViewSet(viewsets.ModelViewSet):
     """handles creating, reading and updating profiles."""
 
-    serializer_class = profiles_serializers.UserProfileSerializer
+    serializer_class = profile_serializers.UserProfileSerializer
     queryset = profile_models.UserProfile.objects.all()
     
     authentication_classes = (TokenAuthentication,)
@@ -45,7 +45,7 @@ class LoginViewSet(viewsets.ViewSet):
 
 class ChangePasswordView(APIView):
     """An endpoint for changing password."""
-    serializer_class = profiles_serializers.ChangePasswordSerializer
+    serializer_class = profile_serializers.ChangePasswordSerializer
     model = profile_models.UserProfile
 
     permission_classes = (permissions.UpdateOwnProfile,)
