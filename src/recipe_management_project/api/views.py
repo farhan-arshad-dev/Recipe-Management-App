@@ -87,7 +87,6 @@ class RecipeViewSet(viewsets.ModelViewSet):
         users = list(following_models.FollowingModel.objects.filter(following_by=self.request.user.id)\
         .values_list("following_to", flat= True))
         users.append(self.request.user.id)
-        print (users)
         return recipe_models.RecipeModel.objects.filter(user_profile__in=users)
 
 
