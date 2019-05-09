@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  # Service name against the project
+  app:
+    build:
+      context: .
+    # map port from host to docker-container
+    ports:
+      # host-port, image-port
+      - "8000:8000"
+    # automatically map the change from host to docker-container
+    volumes:
+      # host-dir:image-dir
+      - ./src:/src
+    # > let us to write the command in multiple lines
+    command: >
+      # sh -c run the command using shell 
+      sh -c "python manage.py runserver 0:8000"
