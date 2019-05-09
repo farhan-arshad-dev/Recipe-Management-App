@@ -24,21 +24,4 @@ class ChangePasswordSerializer(serializers.Serializer):
     """Serializer for password change endpoint."""
     old_password = serializers.CharField(required=True)
     new_password = serializers.CharField(required=True)
-
-
-class RecipeSerializer(serializers.ModelSerializer):
-    """Serializer for user's Recipes object."""
-
-    class Meta:
-        model = models.RecipeModel
-        fields = ('id', 'user_profile', 'title', 'brief_description', 'directions', 'ingredients', 'created_on')
-        extra_kwargs = {'user_profile': {'read_only': True}}
-
-class UserFollowingSerializer(serializers.ModelSerializer):
-    """Serializer for user following item"""
-
-    class Meta:
-        model = models.FollowingModel
-        fields = ('id', 'following_by', 'following_to', 'created_on')
-        extra_kwargs = {'following_by':{'read_only': True}}
     

@@ -1,7 +1,6 @@
+from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager,
+                                        PermissionsMixin)
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser
-from django.contrib.auth.models import PermissionsMixin
-from django.contrib.auth.models import BaseUserManager
 
 # Create your models here.
 
@@ -19,7 +18,7 @@ class UserProfileManager(BaseUserManager):
         # set user's email, and name
         user = self.model(email=email, name=name)
 
-        # set password separately to encrypt. 
+        # set password separately to encrypt.
         user.set_password(password)
         # save use data in database
         user.save(using=self._db)
@@ -68,35 +67,3 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
         """Djang uses this when its need to convert the object to a string."""
 
         return self.email
-
-
-class RecipeModel(models.Model):
-    """ Represent a "Recipe" inside our system"""
-
-    user_profile = models.ForeignKey('UserProfile', on_delete=models.CASCADE)
-    title = models.CharField(max_length=255)
-    brief_description = models.TextField()
-    directions = models.TextField()
-    ingredients = models.TextField()
-    created_on = models.DateTimeField(auto_now_add=True)
-
-
-    def __str__(self):
-        """Return the model as a string."""
-
-        return self.title
-
-class FollowingModel(models.Model):
-    """Represents User following item in our System"""
-
-    following_to = models.ForeignKey('UserProfile', on_delete=models.DO_NOTHING, related_name='following_to')
-    following_by = models.ForeignKey('UserProfile', on_delete=models.DO_NOTHING, related_name='following_by')
-    created_on = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        unique_together = (('following_to', 'following_by'),)
-
-    def __str__(self):
-        """Djang uses this when its need to convert the object to a string."""
-
-        return self.following_by.email+ ' ' + self.following_to.email + ' '
