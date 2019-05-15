@@ -1,0 +1,15 @@
+language: python
+python:
+  # version not match, doen't matter because project run on docker containser 
+  # that have correct verions of python 
+  - "3.6"
+
+services:
+  - docker
+
+# insall docker compose before starting the travis
+before_script: pip install docker-compose
+
+script:
+  # run the docker container and then execute the test and linting tool
+  - docker-compose run app sh -c "python recipe_management_project/manage.py test && flake8"
