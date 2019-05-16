@@ -4,6 +4,7 @@ from django.db import models
 
 # Create your models here.
 
+
 class UserProfileManager(BaseUserManager):
     """Helps Django work with our cutsom model."""
 
@@ -36,6 +37,7 @@ class UserProfileManager(BaseUserManager):
         user.save(using=self._db)
 
         return user
+
 
 class UserProfile(AbstractBaseUser, PermissionsMixin):
     """Represent a "user profiles" inside our system."""
