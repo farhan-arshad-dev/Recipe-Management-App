@@ -64,4 +64,7 @@ python manage.py migrate
 python manage.py runserver 0.0.0.0:8080
 
 http://127.0.0.1:8080/  (Hit this url in browser)
+
 ```
+**Note:**
+For the manually created directory for the Django code it is mandatory to palce the ```__init__.py``` file to make the directory a python package. In our case ```src``` is manually create directory so place ```__init__.py``` in it.
