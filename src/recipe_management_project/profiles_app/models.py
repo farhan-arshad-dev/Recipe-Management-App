@@ -46,8 +46,8 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
 
-    # necessory by the django while create a model.
-    is_actvie = models.BooleanField(default=True)
+    # necessary by the django while create a model.
+    is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
     # helps the django to create user using custom model
