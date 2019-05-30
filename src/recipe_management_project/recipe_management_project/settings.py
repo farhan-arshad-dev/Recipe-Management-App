@@ -87,8 +87,15 @@ WSGI_APPLICATION = 'recipe_management_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        # 'os.environ' gets the environment variables set in the docker-compose
+        # file under the app service the benifit of this we just need to update
+        # the environment variables and donn't have to make any change in the
+        # source code
+        'HOST': os.environ.get('DB_HOST'),
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASS'), 
     }
 }
 
