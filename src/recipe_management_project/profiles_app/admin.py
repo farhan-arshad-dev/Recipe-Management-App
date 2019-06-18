@@ -10,6 +10,7 @@ from django.utils.translation import gettext as _
 class UserAdmin(BaseUserAdmin):
     # Works with test_users_listed in test_admin.py
     ordering = ['id']
+    # list display to the model attributes in admin pannel
     list_display = ['email', 'name']
 
     # customize the user admin fields set to support our custom user model

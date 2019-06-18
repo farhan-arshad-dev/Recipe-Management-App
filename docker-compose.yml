@@ -8,19 +8,21 @@ services:
     # map port from host to docker-container
     ports:
       # host-port, image-port
-      - "8000:8000"
+      - "8080:8080"
     # automatically map the change from host to docker-container
     volumes:
       # host-dir:image-dir
       - ./src:/src
     # > let us to write the command in multiple lines
+    # sh -c run the command using shell
+    # Execute the command to check that database is available or not
+    # Run migrations before start the server
+    # Comments should be on the top of the command tag else `docker-compose up`
+    # will produce the unknow error
     command: >
-      # sh -c run the command using shell
-      # Execute the command to check that database is available or not
-      # Run migrations before start the server
       sh -c "python recipe_management_project/manage.py wait_for_db &&
-             python recipe_management_project/manage.py migrate
-             python recipe_management_project/manage.py runserver 0:8000"
+             python recipe_management_project/manage.py migrate &&
+             python recipe_management_project/manage.py runserver 0.0.0.0:8080"
     # define environment variable and the connection with database
     environment:
       - DB_HOST=db                 # name of the service that runs our database
@@ -41,5 +43,5 @@ services:
     # environment varibles define the database name, user name and the password
     environment:
       - POSTGRES_DB=app
-      - POSTTGRESS_USRE=postgres
+      - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=supersecretpassword
