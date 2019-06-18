@@ -30,11 +30,6 @@ cd /vagrant
 mkvirtualenv recipe_management_api --python=python3
 workon recipe_management_api
 
-pip install django==2.1.7
-pip install djangorestframework==3.9.2
-
-or 
-
 pip install -r requirements.txt
 
 mkdir src
