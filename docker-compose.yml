@@ -1,6 +1,16 @@
 version: "3"
 
 services:
+
+  # service for database called 'db'  
+  db: # name of the service for the database
+    image: postgres:10-alpine  # lightweight version of the image
+    # environment varibles define the database name, user name and the password
+    environment:
+      - POSTGRES_DB=app
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=supersecretpassword
+
   # Service name against the project name 'app'
   app:
     build:
@@ -20,8 +30,7 @@ services:
     # Comments should be on the top of the command tag else `docker-compose up`
     # will produce the unknow error
     command: >
-      sh -c "python recipe_management_project/manage.py wait_for_db &&
-             python recipe_management_project/manage.py migrate &&
+      sh -c "python recipe_management_project/manage.py migrate &&
              python recipe_management_project/manage.py runserver 0.0.0.0:8080"
     # define environment variable and the connection with database
     environment:
@@ -36,12 +45,3 @@ services:
     # is running on the 'db' service
     depends_on: # it can be list of service 
       - db
-
-  # service for database called 'db'  
-  db: # name of the service for the database
-    image: postgres:10-alpine  # lightweight version of the image
-    # environment varibles define the database name, user name and the password
-    environment:
-      - POSTGRES_DB=app
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=supersecretpassword
