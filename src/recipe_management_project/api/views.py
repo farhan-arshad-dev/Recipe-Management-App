@@ -108,11 +108,10 @@ class FollowingViewSet(viewsets.ModelViewSet):
             raise NotAcceptable("You can't follow your own profile")
 
         # check user is trying to follow already following user
-        is_already_following = following_models.FollowingModel.objects.\
-            filter(
-                following_to=following_to.id,
-                following_by=self.request.user.id
-                )
+        is_already_following = following_models.FollowingModel.objects.filter(
+            following_to=following_to.id,
+            following_by=self.request.user.id
+            )
         if(is_already_following):
             raise NotAcceptable("You already following {} user".format(
                 serializer.validated_data['following_to']))
@@ -120,5 +119,5 @@ class FollowingViewSet(viewsets.ModelViewSet):
         serializer.save(following_by=self.request.user)
 
     def get_queryset(self):
-        return following_models.FollowingModel.objects.\
-            filter(following_by=self.request.user.id)
+        return following_models.FollowingModel.objects.filter(
+            following_by=self.request.user.id)
