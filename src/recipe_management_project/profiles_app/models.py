@@ -1,3 +1,8 @@
+"""
+Models definitive source of information about your data. It contains the
+essential fields and behaviors of the data you’re storing. Generally, each
+model maps to a single database table.
+"""
 from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager,
                                         PermissionsMixin)
 from django.db import models
@@ -40,8 +45,10 @@ class UserProfileManager(BaseUserManager):
 
 
 class UserProfile(AbstractBaseUser, PermissionsMixin):
-    """Represent a "user profiles" inside our system."""
-    """Custom user model that supports using email instated of username"""
+    """
+    Represent a "user profiles" inside our system. Custom user model that
+    supports using email instated of username
+    """
 
     email = models.EmailField(max_length=255, unique=True)
     name = models.CharField(max_length=255)

@@ -1,13 +1,18 @@
+"""
+Module to perform register the operations to access from admin pannel.
+"""
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from . import models
 # "_" is the recomended conventions for converting the string in the python to
 # human readable text and the reason to do this it gets the passed through the
 # translation engine.
 from django.utils.translation import gettext as _
 
+from . import models
+
 
 class UserAdmin(BaseUserAdmin):
+    """User Admin to customise the admin page for the User Profile model"""
     # Works with test_users_listed in test_admin.py
     ordering = ['id']
     # list display to the model attributes in admin pannel

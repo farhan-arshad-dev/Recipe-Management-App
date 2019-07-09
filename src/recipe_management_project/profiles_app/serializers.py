@@ -1,3 +1,7 @@
+"""
+Deinfe serializers mechanism for “translating” Django models into other
+formats. Usually text-based formats (e.g json)
+"""
 from rest_framework import serializers
 
 from . import models

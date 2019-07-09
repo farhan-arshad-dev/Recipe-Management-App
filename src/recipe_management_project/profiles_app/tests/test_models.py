@@ -1,9 +1,12 @@
+"""
+Moduel to test the user modules with different edge cases.
+"""
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 
 
 class ModelTests(TestCase):
-
+    """Uses to handle user module tests"""
     def test_create_user_with_email_successful(self):
         """Test creating a new user with an email is successfull"""
         email = 'test@arbisoft.com'

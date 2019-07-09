@@ -1,15 +1,18 @@
 language: python
 python:
-  # version not match, doen't matter because project run on docker containser 
+  # version not matched, doesn't matter because project run on docker container 
   # that have correct verions of python 
   - "3.6"
 
 services:
   - docker
 
-# insall docker compose before starting the travis
-before_script: pip install docker-compose
+# insall docker compose before starting the travis script
+before_script: 
+- pip install docker-compose
 
 script:
-  # run the docker container and then execute the test and linting tool
-  - docker-compose run app sh -c "python recipe_management_project/manage.py test && flake8"
+  # run the docker container, then execute the test and linting tool script
+  - docker-compose run --rm app sh -c "python recipe_management_project/manage.py test" 
+  - docker-compose run --rm app sh -c "pylint --load-plugins pylint_django src"
+  - docker-compose run --rm app sh -c "pycodestyle ."

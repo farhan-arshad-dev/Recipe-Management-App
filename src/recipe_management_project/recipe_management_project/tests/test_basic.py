@@ -1,10 +1,13 @@
+"""
+Sample module to create the sample test cases for the calc module
+"""
 from django.test import TestCase
 
-from recipe_management_project.calc import add, substract
+from ..calc import add, substract
 
 
-# Basic unit test for the project
 class CalcTests(TestCase):
+    """Used to craete the sample unit tests for the calc module"""
 
     def test_add_numbers(self):
         """Test that two numbers are added together"""

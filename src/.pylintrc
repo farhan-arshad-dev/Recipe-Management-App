@@ -1,0 +1,8 @@
+[MASTER]
+
+# Add <file or directory> to the black list. It should be a base name, not a
+# path. You may set this option multiple times.
+ignore=migrations, settings.py, __pychache__, manage.py, wsgi.py, apps.py
+
+[FORMAT]
+good-names=pk, router

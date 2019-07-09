@@ -1,6 +1,0 @@
-[flake8]
-exclude = 
-    recipe_management_project/manage.py,
-    migrations,
-    __pychache__,
-    settings.py

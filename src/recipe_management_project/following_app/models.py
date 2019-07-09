@@ -1,8 +1,9 @@
+"""
+Containes models in support of following_app to follow the other users
+"""
 from django.db import models
 
 from profiles_app import models as profiles_models
-
-# Create your models here.
 
 
 class FollowingModel(models.Model):

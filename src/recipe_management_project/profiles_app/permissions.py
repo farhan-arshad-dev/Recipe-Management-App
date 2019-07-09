@@ -1,3 +1,7 @@
+"""
+Define custom permissions for user profile app to restrict the user
+operations.
+"""
 from rest_framework import permissions
 
 

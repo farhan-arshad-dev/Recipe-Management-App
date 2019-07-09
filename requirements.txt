@@ -3,4 +3,6 @@ djangorestframework>=3.9.2,<3.10.0
 # Django recommended/required for communication between django and Postgres
 psycopg2>=2.8.2,<2.9.0
 
-flake8>=3.7.7,<3.8.0
+pylint>=2.3.1,<2.4.0
+pylint-django>=2.0.9,<2.1.0    # pylint dependency for django project
+pycodestyle>=2.5.0,<2.6.0
