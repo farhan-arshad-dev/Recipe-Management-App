@@ -27,6 +27,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
         return user
 
 
+# pylint: disable=abstract-method
 class ChangePasswordSerializer(serializers.Serializer):
     """Serializer for password change endpoint."""
     old_password = serializers.CharField(required=True)
