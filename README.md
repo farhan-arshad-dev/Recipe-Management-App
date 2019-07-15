@@ -17,7 +17,7 @@ Create a REST based backend for a recipe management app using Django 2 and Pytho
 * Members should be able to view recipes of other members they are following.
 
 ```
-# How to run the Project
+# How to run the Project (using vagrant)
 Checkout the project.
 Open the terminal and set path of project root.
 Run the following commands in sequence
@@ -29,11 +29,6 @@ vagrant ssh
 cd /vagrant
 mkvirtualenv recipe_management_api --python=python3
 workon recipe_management_api
-
-pip install django==2.1.7
-pip install djangorestframework==3.9.2
-
-or 
 
 pip install -r requirements.txt
 
@@ -64,4 +59,23 @@ python manage.py migrate
 python manage.py runserver 0.0.0.0:8080
 
 http://127.0.0.1:8080/  (Hit this url in browser)
+
 ```
+```
+# How to run the Project (using docker)
+
+Open the terminal and set path of project root.
+Run the following commands in sequence
+
+- docker-compose build
+- docker-compose up
+
+http://127.0.0.1:8080/  (Hit this url in browser)
+
+```
+
+**Some Important Points**
+- For the manually created directory for the Django code it is mandatory to palce the ```__init__.py``` file to make the directory a python package. In our case ```src``` is manually create directory so place ```__init__.py``` in it.
+- There shouldn't immediate comments in the docker-compose tags (e.g comments 
+after the `command` tag in the `docker-compose.yml`, otherwise `docker-compose up`
+will raise unknow issue).

@@ -1,8 +1,8 @@
-from django.db.migrations import serializer
+"""
+Define custom permissions for user profile app to restrict the user
+operations.
+"""
 from rest_framework import permissions
-from rest_framework.decorators import action
-
-from . import serializers
 
 
 class UpdateOwnProfile(permissions.BasePermission):
@@ -15,6 +15,7 @@ class UpdateOwnProfile(permissions.BasePermission):
             return True
 
         return obj.id == request.user.id
+
 
 class UpdateOwnRecipes(permissions.BasePermission):
     """Allow users to edit their own recipe."""

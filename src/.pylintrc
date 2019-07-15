@@ -1,0 +1,15 @@
+[MASTER]
+
+# Add <file or directory> to the black list. It should be a base name, not a
+# path. You may set this option multiple times.
+ignore=migrations, settings.py, __pychache__, manage.py, wsgi.py, apps.py
+
+# include the directory path in system to resolve the 
+# E0401: Unable to import * (import-error)
+init-hook="import sys; sys.path.append('recipe_management_project')"
+
+[MESSAGES CONTROL]
+disable=too-many-ancestors, no-self-use
+
+[FORMAT]
+good-names=pk, router

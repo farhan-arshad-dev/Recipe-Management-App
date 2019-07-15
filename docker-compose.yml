@@ -1,0 +1,47 @@
+version: "3"
+
+services:
+
+  # service for database called 'db'  
+  db: # name of the service for the database
+    image: postgres:10-alpine  # lightweight version of the image
+    # environment varibles define the database name, user name and the password
+    environment:
+      - POSTGRES_DB=app
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=supersecretpassword
+
+  # Service name against the project name 'app'
+  app:
+    build:
+      context: .
+    # map port from host to docker-container
+    ports:
+      # host-port, image-port
+      - "8080:8080"
+    # automatically map the change from host to docker-container
+    volumes:
+      # host-dir:image-dir
+      - ./src:/src
+    # > let us to write the command in multiple lines
+    # sh -c run the command using shell
+    # Execute the command to check that database is available or not
+    # Run migrations before start the server
+    # Comments should be on the top of the command tag else `docker-compose up`
+    # will produce the unknow error
+    command: >
+      sh -c "python recipe_management_project/manage.py migrate &&
+             python recipe_management_project/manage.py runserver 0.0.0.0:8080"
+    # define environment variable and the connection with database
+    environment:
+      - DB_HOST=db                 # name of the service that runs our database
+      - DB_NAME=app                # database name
+      - DB_USER=postgres           # database user to access the database
+      - DB_PASS=supersecretpassword # database user password
+    # define that app service is depends on the db service this means two things
+    # 1. Database service start before the app service
+    # 2. Database service will e available via the network while using the
+    # host name 'db' and can connect with the host name and the container that
+    # is running on the 'db' service
+    depends_on: # it can be list of service 
+      - db
