@@ -29,8 +29,4 @@ class RecipeViewSet(viewsets.ModelViewSet):
 
     # override method to get user's own recipe data
     def get_queryset(self):
-        users = list(following_models.FollowingModel.objects.filter(
-            following_by=self.request.user.id
-            ).values_list("following_to", flat=True))
-        users.append(self.request.user.id)
-        return recipe_models.RecipeModel.objects.filter(user_profile__in=users)
+        return recipe_models.RecipeModel.objects.filter(user_profile=self.request.user)
