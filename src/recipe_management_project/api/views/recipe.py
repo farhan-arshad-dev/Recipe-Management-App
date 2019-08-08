@@ -18,7 +18,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
     """Handles creating, reading and updating user's recipe items."""
 
     authentication_classes = (TokenAuthentication,)
-    serializer_class = recipe_serializer.RecipeSerializer
+    serializer_class = recipe_serializer.UserRecipeSerializer
     queryset = recipe_models.RecipeModel.objects.all()
     permission_classes = (permissions.UpdateOwnRecipes, IsAuthenticated)
 
@@ -29,5 +29,5 @@ class RecipeViewSet(viewsets.ModelViewSet):
     # override method to get user's own recipe data
     def get_queryset(self):
         return recipe_models.RecipeModel.objects.filter(
-            user_profile=self.request.user
+            created_by=self.request.user
             )

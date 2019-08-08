@@ -16,7 +16,7 @@ router.register('recipe', recipe.RecipeViewSet)
 router.register('follow', followers.FollowingViewSet)
 
 urlpatterns = [
-    url('change_password', user_profile.ChangePasswordView.as_view()),
-    url('followed_user_recipes', followers.ChangePasswordView.as_view()),
+    url('change-password', user_profile.ChangePasswordView.as_view()),
+    url('followed-user-recipes', followers.FollowedUserRecipe.as_view()),
     url(r'', include(router.urls))
 ]

@@ -12,7 +12,7 @@ from rest_framework.permissions import IsAuthenticated
 from following_app import models as following_models
 from following_app import serializers as following_serializers
 from recipe_app.models import RecipeModel
-from recipe_app.serializers import RecipeSerializer
+from recipe_app.serializers import UserRecipeSerializer
 
 
 class FollowingViewSet(viewsets.ModelViewSet):
@@ -48,9 +48,9 @@ class FollowingViewSet(viewsets.ModelViewSet):
             following_by=self.request.user.id)
 
 
-class ChangePasswordView(ListAPIView):
+class FollowedUserRecipe(ListAPIView):
     """To create an endpoint to get the other followed user recipies"""
-    serializer_class = RecipeSerializer
+    serializer_class = UserRecipeSerializer
     model = RecipeModel
 
     authentication_classes = (TokenAuthentication,)
@@ -60,4 +60,4 @@ class ChangePasswordView(ListAPIView):
         users = list(following_models.FollowingModel.objects.filter(
             following_by=self.request.user.id
             ).values_list("following_to", flat=True))
-        return RecipeModel.objects.filter(user_profile__in=users)
+        return RecipeModel.objects.filter(created_by__in=users)
