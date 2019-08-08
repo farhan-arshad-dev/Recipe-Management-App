@@ -17,5 +17,6 @@ router.register('follow', followers.FollowingViewSet)
 
 urlpatterns = [
     url('change_password', user_profile.ChangePasswordView.as_view()),
+    url('followed_user_recipes', followers.ChangePasswordView.as_view()),
     url(r'', include(router.urls))
 ]

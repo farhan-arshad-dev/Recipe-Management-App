@@ -9,7 +9,6 @@ from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
-from following_app import models as following_models
 from profiles_app import permissions
 from recipe_app import models as recipe_models
 from recipe_app import serializers as recipe_serializer
@@ -29,4 +28,6 @@ class RecipeViewSet(viewsets.ModelViewSet):
 
     # override method to get user's own recipe data
     def get_queryset(self):
-        return recipe_models.RecipeModel.objects.filter(user_profile=self.request.user)
+        return recipe_models.RecipeModel.objects.filter(
+            user_profile=self.request.user
+            )
